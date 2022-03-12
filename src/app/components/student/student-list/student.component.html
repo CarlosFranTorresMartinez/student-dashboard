@@ -9,7 +9,7 @@
     <ng-container matColumnDef="FULL_NAME">
       <th mat-header-cell *matHeaderCellDef> NOMBRE COMPLETO</th>
       <td mat-cell
-          *matCellDef="let element"> {{element.NAME}} {{element.FATHER_LASTNAME}} {{element.MOTHER_LASTNAME}}</td>
+          *matCellDef="let element"> {{element.FATHER_LASTNAME}} {{element.MOTHER_LASTNAME}}, {{element.NAME}}</td>
     </ng-container>
 
     <ng-container matColumnDef="DNI">

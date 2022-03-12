@@ -17,14 +17,14 @@ export class StudentService {
 
   getStudent(): Observable<Student[]> {
     const params = new HttpParams()
-      .set('action', 'list');
+      .set('action', 'listStudent');
 
     return this.http.get<Array<Student>>(`${this.uri}`, {params});
   }
 
   saveStudent(student: Student) {
     const params = new HttpParams()
-      .set('action', 'save')
+      .set('action', 'saveStudent')
       .set('id_student', student.ID_STUDENT)
       .set('name', student.NAME)
       .set('father_lastname', student.FATHER_LASTNAME)

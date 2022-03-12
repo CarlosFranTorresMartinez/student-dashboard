@@ -13,7 +13,6 @@ import {Router} from "@angular/router";
 export class StudentFormComponent {
   form: FormGroup;
 
-
   constructor(private fb: FormBuilder,
               private studentServices: StudentService,
               private router: Router) {
@@ -32,14 +31,17 @@ export class StudentFormComponent {
     const student: Student = {
       ID_STUDENT: uuid,
       NAME: this.form.value.name,
-      FATHER_LASTNAME: this.form.value.father_lastname,
-      MOTHER_LASTNAME: this.form.value.mother_lastname,
+      FATHER_LASTNAME: this.form.value.father_lastname.toString().toUpperCase(),
+      MOTHER_LASTNAME: this.form.value.mother_lastname.toString().toUpperCase(),
       DNI: this.form.value.dni,
       EMAIL: this.form.value.email
     }
 
     this.studentServices.saveStudent(student)
-      .subscribe(value => this.studentServices.getStudent(), error => console.log(error));
+      .subscribe({
+        next: value => this.studentServices.getStudent(),
+        error: err => console.log(err)
+      });
 
     this.router.navigate(['/student/'])
       .catch(reason => console.log(reason));
