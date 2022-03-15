@@ -1,0 +1,39 @@
+<div class="table-size mat-elevation-z8">
+
+  <table mat-table [dataSource]="assingList" class="mat-elevation-z8" aria-describedby="table_student">
+    <ng-container matColumnDef="TUTOR_NAME">
+      <th mat-header-cell *matHeaderCellDef>NOMBRE DEL TUTOR</th>
+      <td mat-cell *matCellDef="let element"> {{element.TUTOR.NAME }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TUTOR_EMAIL">
+      <th mat-header-cell *matHeaderCellDef>CORREO DEL TUTOR</th>
+      <td mat-cell *matCellDef="let element"> {{element.TUTOR.EMAIL }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CAREES">
+      <th mat-header-cell *matHeaderCellDef>CARRERA</th>
+      <td mat-cell *matCellDef="let element"> {{element.CAREER.NAME}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="STUDENT_NAME">
+      <th mat-header-cell *matHeaderCellDef>NOMBRE DEL ESTUDIANTE</th>
+      <td mat-cell *matCellDef="let element"> {{element.STUDENT.FATHER_LASTNAME}} {{element.STUDENT.MOTHER_LASTNAME}}
+        , {{element.STUDENT.NAME}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="STUDENT_EMAIL">
+      <th mat-header-cell *matHeaderCellDef>CORREO DEL ESTUDIANTE</th>
+      <td mat-cell *matCellDef="let element"> {{element.STUDENT.EMAIL}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SEMESTRE">
+      <th mat-header-cell *matHeaderCellDef>SEMESTRE</th>
+      <td mat-cell *matCellDef="let element"> {{element.SEMESTRE}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsAssing; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsAssing;"></tr>
+  </table>
+
+</div>
