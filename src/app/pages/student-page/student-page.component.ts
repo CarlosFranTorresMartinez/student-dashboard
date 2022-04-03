@@ -1,48 +1,71 @@
-import {Component, OnInit} from '@angular/core';
-import {Student} from "../../model/Student";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Student} from 'src/app/model/Student';
 import {StudentService} from "../../services/student.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackBarComponent} from "../../components/snack-bar/snack-bar.component";
+import {MessageService} from "primeng/api";
+import {StudentFormComponent} from "../../components/student/student-form/student-form.component";
 
 @Component({
   selector: 'app-student-page',
   templateUrl: './student-page.component.html',
-  styleUrls: ['./student-page.component.css']
+  styleUrls: ['./student-page.component.css'],
+  providers: [MessageService]
 })
 export class StudentPageComponent implements OnInit {
 
-  studentList: Array<Student> = [];
-  isLoading: boolean = false;
+  @ViewChild(StudentFormComponent) studentForm!: StudentFormComponent;
 
-  constructor(private studentServices: StudentService, private _snackBar: MatSnackBar) {
+  studentList: Array<Student> = [];
+  isLoadingList: boolean = false;
+  isLoadingForm: boolean = false;
+  status!: number;
+
+  constructor(private studentService: StudentService, private messageService: MessageService) {
   }
+
 
   ngOnInit(): void {
     this.getStudent();
   }
 
-  openSnackBar() {
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: 5 * 1000,
+  save(e: Student) {
+    this.isLoadingForm = true;
+    this.studentService.saveStudent(e).subscribe({
+      next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registro exitoso',
+          detail: `El alunmo  ${res.name} con ${res.dni} ha sido registrado correctamente`
+        });
+        this.isLoadingForm = false;
+      },
+      error: (err) => {
+        this.isLoadingForm = true;
+        this.status = err.status;
+      },
+      complete: () => {
+        this.isLoadingForm = false;
+        this.studentForm.clear();
+        this.getStudent();
+      }
     });
   }
 
   getStudent() {
-    this.isLoading = true;
-    this.studentServices.getStudent()
-      .subscribe(
-        value => {
-          this.isLoading = false;
-          this.studentList = value;
-        },
-        error => {
-          this.isLoading = true;
-          this.openSnackBar();
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
+    this.isLoadingList = true;
+    this.studentService.getStudent().subscribe({
+      next: value => {
+        this.status = 1;
+        this.isLoadingList = false;
+        this.studentList = value;
+      },
+      error: (err) => {
+        this.status = err.status;
+        this.isLoadingList = false;
+      },
+      complete: () => {
+        this.isLoadingList = false;
+      }
+    });
   }
 
 }

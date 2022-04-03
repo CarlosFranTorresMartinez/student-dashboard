@@ -1,0 +1,26 @@
+<div class="table-size">
+  <p-table #dt [value]="student" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">Nombre completo del estudiante</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Correo</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>{{student.fatherLastname}} {{student.motherLastname}}, {{student.name}}</td>
+        <td>{{student.dni}}</td>
+        <td>{{student.email}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between" *ngIf="status != 0">
+        Hay un total de {{student ? student.length : 0 }} alunmos registrados.
+      </div>
+      <div class="flex align-items-center justify-content-between" *ngIf="status == 0">
+        No se han encontrado datos debido a un error.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

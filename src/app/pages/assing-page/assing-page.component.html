@@ -1,9 +1,0 @@
-<div class="container">
-  <mat-toolbar mat-elevation-z6>
-    <span>Asignacion de estudiante con monitor</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" routerLink="/assing/assing-create">Agregar</button>
-  </mat-toolbar>
-  <app-loading *ngIf="isLoading"></app-loading>
-  <app-assing-list *ngIf="!isLoading" [assingList]="assingList"></app-assing-list>
-</div>

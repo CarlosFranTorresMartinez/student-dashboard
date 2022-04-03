@@ -1,49 +1,51 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Student} from "../../../model/Student";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {v4 as uuidv4} from 'uuid';
-import {StudentService} from "../../../services/student.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
-  styleUrls: ['./student-form.component.css'],
+  styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent {
+
+
+  @Output('onSubmit') onSubmit = new EventEmitter<Student>();
+  @Output('onCancel') onCancel = new EventEmitter<void>();
+
+  @Input() isLoading!: boolean;
+
+  submitted!: boolean;
+  student!: Student;
+
   form: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private studentServices: StudentService,
-              private router: Router) {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      father_lastname: ['', Validators.required],
-      mother_lastname: ['', Validators.required],
-      dni: ['', Validators.required],
-      email: ['', Validators.required]
+      fatherLastname: ['', Validators.required],
+      motherLastname: ['', Validators.required],
+      email: ['', Validators.required],
+      dni: ['', Validators.required]
+    })
+  }
+
+  submit(): void {
+    const uuid = uuidv4();
+    this.onSubmit.emit({
+      id: uuid,
+      name: this.form.value.name,
+      fatherLastname: this.form.value.fatherLastname,
+      motherLastname: this.form.value.motherLastname,
+      email: this.form.value.email,
+      dni: this.form.value.dni
     });
   }
 
-  submit() {
-    const uuid = uuidv4();
-
-    const student: Student = {
-      ID_STUDENT: uuid,
-      NAME: this.form.value.name,
-      FATHER_LASTNAME: this.form.value.father_lastname.toString().toUpperCase(),
-      MOTHER_LASTNAME: this.form.value.mother_lastname.toString().toUpperCase(),
-      DNI: this.form.value.dni,
-      EMAIL: this.form.value.email
-    }
-
-    this.studentServices.saveStudent(student)
-      .subscribe({
-        next: value => this.studentServices.getStudent(),
-        error: err => console.log(err)
-      });
-
-    this.router.navigate(['/student/'])
-      .catch(reason => console.log(reason));
+  clear(): void {
+    this.form.reset();
+    this.submitted = false
   }
+
 }

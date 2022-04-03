@@ -7,28 +7,18 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+button.ui-button {
+  margin-right: .5rem;
+}
+
 .container {
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 20px;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-table {
-  width: 100%;
+a {
+  text-decoration: none;
 }
 
 .table-size {
@@ -38,13 +28,6 @@ table {
   overflow: auto;
 }
 
-.navbar {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-mat-header-cell, mat-cell {
-  justify-content: center;
+table {
+  width: 100%;
 }

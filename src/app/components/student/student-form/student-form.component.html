@@ -1,53 +1,60 @@
-<div class="container">
-  <mat-toolbar>
-    <span>Registrar estudiante</span>
-  </mat-toolbar>
+<div style="margin-bottom: 20px">
+  <p-toolbar>
+    <span>Estudiante</span>
+  </p-toolbar>
 
-  <mat-card style="margin-top: 10px" class="mat-elevation-z8">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <mat-grid-list cols="4" rowHeight="70px">
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-form-field appearance="fill" class="ancho">
-            <mat-label>Nombre</mat-label>
-            <input matInput autocomplete="off" formControlName="name">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="3" rowspan="6">
-          <img src="https://cdn.pixabay.com/photo/2017/08/16/00/29/add-person-2646097_960_720.png" alt="Imagen Crear"
-               style="height: calc(100% - 70px); ">
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-form-field appearance="fill" class="ancho">
-            <mat-label>Apellido Paterno</mat-label>
-            <input matInput autocomplete="off" formControlName="father_lastname">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-form-field appearance="fill" class="ancho">
-            <mat-label>Apellido Materno</mat-label>
-            <input matInput autocomplete="off" formControlName="mother_lastname">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-form-field appearance="fill" class="ancho">
-            <mat-label>DNI</mat-label>
-            <input matInput #input maxlength="8" autocomplete="off" formControlName="dni">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-form-field appearance="fill" class="ancho">
-            <mat-label>Correo</mat-label>
-            <input matInput autocomplete="off" formControlName="email">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <button mat-raised-button type="submit" color="primary" style="margin-right: 20px" [disabled]="form.invalid">
-            Guardar
-          </button>
-          <button mat-raised-button color="accent" type="button" routerLink="/student">Volver</button>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-  </mat-card>
+  <p-card>
 
+    <ng-template pTemplate="content">
+      <form (ngSubmit)="submit()" [formGroup]="form">
+        <div class="field grid">
+          <label for="name" class="col-12 mb-2 md:col-2 md:mb-0">Nombre</label>
+          <div class="col-12 md:col-10">
+            <input id="name" pInputText type="text" class="inputfield w-full" formControlName="name">
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label for="fatherLastname" class="col-12 mb-2 md:col-2 md:mb-0">Apellido Paterno</label>
+          <div class="col-12 md:col-10">
+            <input id="fatherLastname" pInputText type="text" class="inputfield w-full"
+                   formControlName="fatherLastname">
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label for="motherLastname" class="col-12 mb-2 md:col-2 md:mb-0">Apellido Materno</label>
+          <div class="col-12 md:col-10">
+            <input id="motherLastname" pInputText type="text" class="inputfield w-full"
+                   formControlName="motherLastname">
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label for="dni" class="col-12 mb-2 md:col-2 md:mb-0">DNI</label>
+          <div class="col-12 md:col-10">
+            <input id="dni" pInputText type="text" class="inputfield w-full" formControlName="dni">
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label for="email" class="col-12 mb-2 md:col-2 md:mb-0">Correo</label>
+          <div class="col-12 md:col-10">
+            <input id="email" pInputText type="text" class="inputfield w-full" formControlName="email">
+          </div>
+        </div>
+
+
+        <button pButton pRipple type="submit" label="Guardar" icon="pi pi-save" [loading]="isLoading"
+                [disabled]="form.invalid"></button>
+
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" (click)="clear()"
+                [disabled]="form.invalid"
+                class="p-button-raised p-button-danger"></button>
+
+      </form>
+    </ng-template>
+
+
+  </p-card>
 </div>

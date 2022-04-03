@@ -1,9 +1,8 @@
+<p-toast></p-toast>
 <div class="container">
-  <mat-toolbar class="mat-elevation-z6">
-    <span>Estudiante</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" routerLink="/student/student-create">Agregar</button>
-  </mat-toolbar>
-  <app-loading *ngIf="isLoading"></app-loading>
-  <app-student-list [student]="studentList" *ngIf="!isLoading"></app-student-list>
+  <app-student-form (onSubmit)="save($event)" [isLoading]="isLoadingForm"></app-student-form>
+
+  <p-progressSpinner *ngIf="isLoadingList" style=""></p-progressSpinner>
+  <app-student-list [student]="studentList" *ngIf="!isLoadingList" [status]="status" ></app-student-list>
+
 </div>
