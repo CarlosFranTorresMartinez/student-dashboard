@@ -7,8 +7,7 @@ import {StudentFormComponent} from "../../components/student/student-form/studen
 @Component({
   selector: 'app-student-page',
   templateUrl: './student-page.component.html',
-  styleUrls: ['./student-page.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./student-page.component.css']
 })
 export class StudentPageComponent implements OnInit {
 
@@ -22,9 +21,22 @@ export class StudentPageComponent implements OnInit {
   constructor(private studentService: StudentService, private messageService: MessageService) {
   }
 
-
   ngOnInit(): void {
     this.getStudent();
+  }
+
+  changeStatus(id: string) {
+    this.studentService.changeStatus(id).subscribe({
+      next: value => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Se elimino el alunmo'
+        });
+      },
+      complete: () => {
+        this.getStudent();
+      }
+    });
   }
 
   save(e: Student) {
@@ -34,16 +46,27 @@ export class StudentPageComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Registro exitoso',
-          detail: `El alunmo  ${res.name} con ${res.dni} ha sido registrado correctamente`
+          detail: `El alunmo  ${res.name} con dni ${res.dni} ha sido registrado correctamente.`
         });
         this.isLoadingForm = false;
       },
       error: (err) => {
-        this.isLoadingForm = true;
-        this.status = err.status;
+        this.isLoadingForm = false;
+        if (err.status == 400) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Registro duplicado',
+            detail: `El alunmo  ${err.error.name} con dni ${err.error.dni} ya ha sido registrado.`
+          });
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error al registrar',
+            detail: `El alunmo  ${err.error.name} con dni ${err.error.dni} no ha sido registrado.`
+          });
+        }
       },
       complete: () => {
-        this.isLoadingForm = false;
         this.studentForm.clear();
         this.getStudent();
       }

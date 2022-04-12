@@ -5,4 +5,5 @@ export interface Student {
   motherLastname: string;
   email: string;
   dni: number;
+  status: string;
 }

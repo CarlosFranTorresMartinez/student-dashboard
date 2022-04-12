@@ -33,14 +33,14 @@
         <div class="field grid">
           <label for="dni" class="col-12 mb-2 md:col-2 md:mb-0">DNI</label>
           <div class="col-12 md:col-10">
-            <input id="dni" pInputText type="text" class="inputfield w-full" formControlName="dni">
+            <input id="dni" pInputText type="text" class="inputfield w-full" formControlName="dni" [maxLength]="8">
           </div>
         </div>
 
         <div class="field grid">
           <label for="email" class="col-12 mb-2 md:col-2 md:mb-0">Correo</label>
           <div class="col-12 md:col-10">
-            <input id="email" pInputText type="text" class="inputfield w-full" formControlName="email">
+            <input id="email" pInputText type="email" class="inputfield w-full" formControlName="email" [email]="true">
           </div>
         </div>
 

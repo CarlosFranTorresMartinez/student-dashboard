@@ -1,7 +1,7 @@
 import {NgModule, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {PrimeNGConfig} from 'primeng/api';
+import {MessageService, PrimeNGConfig} from 'primeng/api';
 import {InputTextModule} from "primeng/inputtext";
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
@@ -12,6 +12,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {CardModule} from "primeng/card";
 import {InputNumberModule} from "primeng/inputnumber";
 import {ToastModule} from "primeng/toast";
+import {DropdownModule} from "primeng/dropdown";
+import {PickListModule} from "primeng/picklist";
 
 @NgModule({
   declarations: [],
@@ -29,8 +31,10 @@ import {ToastModule} from "primeng/toast";
     ProgressSpinnerModule,
     CardModule,
     InputNumberModule,
-    ToastModule
-  ]
+    ToastModule,
+    DropdownModule,
+    PickListModule
+  ],
 })
 export class PrimeAngularModule implements OnInit {
 

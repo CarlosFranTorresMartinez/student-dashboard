@@ -11,6 +11,10 @@ import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {HttpClientModule} from "@angular/common/http";
 import {StudentFormComponent} from './components/student/student-form/student-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AssingListComponent } from './components/assing/assing-list/assing-list.component';
+import { AssingFormComponent } from './components/assing/assing-form/assing-form.component';
+import { AssingPageComponent } from './pages/assing-page/assing-page.component';
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -19,6 +23,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     StudentListComponent,
     StudentPageComponent,
     StudentFormComponent,
+    AssingListComponent,
+    AssingFormComponent,
+    AssingPageComponent,
   ],
   imports: [
     BrowserModule,

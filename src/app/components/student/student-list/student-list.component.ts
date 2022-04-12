@@ -1,12 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Student} from "../../../model/Student";
+import {AssingPost} from "../../../model/assing/AssingPost";
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css']
 })
-export class StudentListComponent implements OnInit {
+export class StudentListComponent {
 
   @Input()
   student!: Student[];
@@ -14,11 +15,16 @@ export class StudentListComponent implements OnInit {
   @Input()
   status!: number;
 
-  constructor() {
+  @Output('changeStatus')
+  changeStatus: any = new EventEmitter<Object>();
+
+  getValue(e: Event) {
+    return (e.target as HTMLTextAreaElement).value;
   }
 
-  ngOnInit(): void {
-
+  onChangeStatus(e: string) {
+    const id = e;
+    this.changeStatus.emit(id)
   }
 
 }

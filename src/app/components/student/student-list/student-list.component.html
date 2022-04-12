@@ -1,17 +1,80 @@
-<div class="table-size">
-  <p-table #dt [value]="student" responsiveLayout="scroll">
+<div>
+  <p-table #dt [value]="student" responsiveLayout="scroll" dataKey="student.id" styleClass="p-datatable-customers"
+           [rowHover]="true"
+           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+           [paginator]="true"
+           [filterDelay]="0"
+           [globalFilterFields]="['name','fatherLastname','motherLastname','dni','email']">
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        Lista de estudiantes
+        <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal(getValue($event) , 'contains')"
+                       placeholder="Global Search"/>
+            </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th scope="col">Nombre completo del estudiante</th>
-        <th scope="col">DNI</th>
-        <th scope="col">Correo</th>
+        <th scope="col" pSortableColumn="name">
+          <div class="flex justify-content-between align-items-center">
+            Nombre
+            <p-sortIcon field="name"></p-sortIcon>
+          </div>
+        </th>
+        <th scope="col" pSortableColumn="fatherLastname">
+          <div class="flex justify-content-between align-items-center">
+            Apellido Paterno
+            <p-sortIcon field="fatherLastname"></p-sortIcon>
+          </div>
+        </th>
+        <th scope="col" pSortableColumn="motherLastname">
+          <div class="flex justify-content-between align-items-center">
+            Apellido Materno
+            <p-sortIcon field="motherLastname"></p-sortIcon>
+          </div>
+        </th>
+        <th scope="col" pSortableColumn="dni">
+          <div class="flex justify-content-between align-items-center">
+            DNI
+            <p-sortIcon field="dni"></p-sortIcon>
+          </div>
+        </th>
+        <th scope="col" pSortableColumn="email">
+          <div class="flex justify-content-between align-items-center">
+            Correo
+            <p-sortIcon field="email"></p-sortIcon>
+          </div>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-student>
       <tr>
-        <td>{{student.fatherLastname}} {{student.motherLastname}}, {{student.name}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.fatherLastname}}</td>
+        <td>{{student.motherLastname}}</td>
         <td>{{student.dni}}</td>
         <td>{{student.email}}</td>
+        <td style="text-align: center">
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"></button>
+        </td>
+        <td style="text-align: center">
+          <p-button class="p-button-danger" icon="pi pi-times" (onClick)="onChangeStatus(student.id)"></p-button>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">

@@ -26,8 +26,8 @@ export class StudentFormComponent {
       name: ['', Validators.required],
       fatherLastname: ['', Validators.required],
       motherLastname: ['', Validators.required],
-      email: ['', Validators.required],
-      dni: ['', Validators.required]
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      dni: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     })
   }
 
@@ -35,17 +35,19 @@ export class StudentFormComponent {
     const uuid = uuidv4();
     this.onSubmit.emit({
       id: uuid,
-      name: this.form.value.name,
-      fatherLastname: this.form.value.fatherLastname,
-      motherLastname: this.form.value.motherLastname,
-      email: this.form.value.email,
-      dni: this.form.value.dni
+      name: this.form.value.name.trim(),
+      fatherLastname: this.form.value.fatherLastname.toUpperCase().trim(),
+      motherLastname: this.form.value.motherLastname.toUpperCase().trim(),
+      email: this.form.value.email.trim(),
+      dni: this.form.value.dni.trim(),
+      status: 'A'
     });
   }
 
   clear(): void {
     this.form.reset();
-    this.submitted = false
+    this.isLoading = false;
+    this.submitted = false;
   }
 
 }
