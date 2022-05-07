@@ -1,22 +1,28 @@
 <div>
-  <p-table #dt [value]="student" responsiveLayout="scroll" dataKey="student.id" styleClass="p-datatable-customers"
+  <p-table #dt [value]="studentList"
+           responsiveLayout="scroll"
+           dataKey="student.id"
+           styleClass="p-datatable-customers"
            [rowHover]="true"
-           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+           [rows]="10"
+           [showCurrentPageReport]="true"
+           [rowsPerPageOptions]="[10,25,50]"
            [paginator]="true"
            [filterDelay]="0"
-           [globalFilterFields]="['name','fatherLastname','motherLastname','dni','email']">
+           [globalFilterFields]="['name','fatherLastname','motherLastname','dni','email','career']">
     <ng-template pTemplate="caption">
       <div class="table-header">
         Lista de estudiantes
         <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal(getValue($event) , 'contains')"
-                       placeholder="Global Search"/>
+                       placeholder="Busqueda Global"/>
             </span>
       </div>
     </ng-template>
     <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
+        <col>
         <col>
         <col>
         <col>
@@ -58,6 +64,12 @@
             <p-sortIcon field="email"></p-sortIcon>
           </div>
         </th>
+        <th scope="col" pSortableColumn="career">
+          <div class="flex justify-content-between align-items-center">
+            Carrera
+            <p-sortIcon field="career"></p-sortIcon>
+          </div>
+        </th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -65,12 +77,13 @@
     <ng-template pTemplate="body" let-student>
       <tr>
         <td>{{student.name}}</td>
-        <td>{{student.fatherLastname}}</td>
-        <td>{{student.motherLastname}}</td>
+        <td>{{student.father_lastname}}</td>
+        <td>{{student.mother_lastname}}</td>
         <td>{{student.dni}}</td>
         <td>{{student.email}}</td>
+        <td>{{student.career}}</td>
         <td style="text-align: center">
-          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"></button>
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog" (click)="getData(student)"></button>
         </td>
         <td style="text-align: center">
           <p-button class="p-button-danger" icon="pi pi-times" (onClick)="onChangeStatus(student.id)"></p-button>

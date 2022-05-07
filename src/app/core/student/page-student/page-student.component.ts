@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Student} from "../../../model/Student";
-import {StudentService} from "../../../services/student.service";
 import {MessageService} from "primeng/api";
+import {StudentService} from "../../../service/student.service";
+import {Student} from "../../../model/Student";
 import {FormStudentComponent} from "../form-student/form-student.component";
+import {ListStudentComponent} from "../list-student/list-student.component";
 
 @Component({
   selector: 'app-page-student',
@@ -11,27 +12,81 @@ import {FormStudentComponent} from "../form-student/form-student.component";
 })
 export class PageStudentComponent implements OnInit {
 
-  @ViewChild(FormStudentComponent) studentForm!: FormStudentComponent;
+  student!: Student;
+  listStudent!: Student[];
+  @ViewChild(FormStudentComponent) formStudentComponent!: FormStudentComponent;
 
-  studentList: Array<Student> = [];
-  isLoadingList: boolean = false;
-  isLoadingForm: boolean = false;
-  status!: number;
-
-  constructor(private studentService: StudentService, private messageService: MessageService) {
+  constructor(private studentServices: StudentService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
     this.getStudent();
   }
 
-  handleInput(e: Event) {
-    return (e.target as HTMLInputElement).value;
+  onSubmit(e: Student) {
+    if (e.method === "update") {
+      this.updateStudent(e);
+    } else {
+      this.saveStudent(e);
+    }
   }
 
-  changeStatus(e: Event) {
-    const value = this.handleInput(e);
-    this.studentService.changeStatus(value).subscribe({
+  saveStudent(e: Student) {
+    this.studentServices.saveStudent(e).subscribe({
+      next: value => {
+        this.messageService.add({
+          severity: 'success',
+          summary: value.message
+        })
+      },
+      error: err => {
+        this.messageService.add({
+          severity: 'warn',
+          summary: err.error.message
+        })
+      },
+      complete: () => {
+        this.getStudent();
+        this.formStudentComponent.clear();
+      }
+    })
+  }
+
+  getDataForStudent(e: Student) {
+    this.formStudentComponent.studentForUpdate(e);
+  }
+
+
+  updateStudent(e: Student) {
+    this.studentServices.updateStudent(e).subscribe({
+      next: value => {
+        this.messageService.add({
+          severity: 'success',
+          summary: value.message
+        })
+      },
+      error: err => {
+        this.messageService.add({
+          severity: 'warn',
+          summary: err.error.message
+        })
+      },
+      complete: () => {
+        this.getStudent();
+        this.formStudentComponent.clear();
+      }
+    })
+  }
+
+  getStudent() {
+    this.studentServices.getStudent().subscribe({
+      next: value => this.listStudent = value,
+      error: err => console.error(err)
+    })
+  }
+
+  changeStatus(id: string) {
+    this.studentServices.changeStatus(id).subscribe({
       next: value => {
         this.messageService.add({
           severity: 'success',
@@ -43,58 +98,5 @@ export class PageStudentComponent implements OnInit {
       }
     });
   }
-
-  save(e: Student) {
-    this.isLoadingForm = true;
-    this.studentService.saveStudent(e).subscribe({
-      next: (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Registro exitoso',
-          detail: `El alunmo  ${res.name} con dni ${res.dni} ha sido registrado correctamente.`
-        });
-        this.isLoadingForm = false;
-      },
-      error: (err) => {
-        this.isLoadingForm = false;
-        if (err.status == 400) {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'Registro duplicado',
-            detail: `El alunmo  ${err.error.name} con dni ${err.error.dni} ya ha sido registrado.`
-          });
-        } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error al registrar',
-            detail: `El alunmo  ${err.error.name} con dni ${err.error.dni} no ha sido registrado.`
-          });
-        }
-      },
-      complete: () => {
-        this.studentForm.clear();
-        this.getStudent();
-      }
-    });
-  }
-
-  getStudent() {
-    this.isLoadingList = true;
-    this.studentService.getStudent().subscribe({
-      next: value => {
-        this.status = 1;
-        this.isLoadingList = false;
-        this.studentList = value;
-      },
-      error: (err) => {
-        this.status = err.status;
-        this.isLoadingList = false;
-      },
-      complete: () => {
-        this.isLoadingList = false;
-      }
-    });
-  }
-
 
 }

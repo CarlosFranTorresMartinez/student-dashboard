@@ -1,9 +1,13 @@
 export interface Student {
   id: string;
   name: string;
-  fatherLastname: string;
-  motherLastname: string;
+  father_lastname: string;
+  mother_lastname: string;
   email: string;
-  dni: number;
-  status: string;
+  dni: string;
+  career: string;
+  status?: string;
+  message?: string;
+  code?: string;
+  method?: string;
 }

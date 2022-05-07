@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {PageStudentComponent} from "../core/student/page-student/page-student.component";
 
+
 const router: Routes = [
   {
     path: 'student', children: [
@@ -9,6 +10,7 @@ const router: Routes = [
     ]
   }
 ]
+
 
 @NgModule({
   declarations: [],

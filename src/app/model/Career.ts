@@ -1,4 +1,4 @@
 export interface Career {
-  code: number;
+  code: string;
   name: string;
 }

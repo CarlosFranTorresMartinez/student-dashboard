@@ -1,22 +1,27 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {PrimeNGConfig} from 'primeng/api';
+import {NgModule, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InputTextModule} from "primeng/inputtext";
-import {ToolbarModule} from 'primeng/toolbar';
+import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {RippleModule} from "primeng/ripple";
 import {TableModule} from "primeng/table";
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {CardModule} from "primeng/card";
 import {InputNumberModule} from "primeng/inputnumber";
 import {ToastModule} from "primeng/toast";
 import {DropdownModule} from "primeng/dropdown";
 import {PickListModule} from "primeng/picklist";
+import {PrimeNGConfig} from "primeng/api";
+import {RadioButtonModule} from "primeng/radiobutton";
+
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [],
+  imports: [
+    CommonModule
+  ],
   exports: [
     BrowserAnimationsModule,
     InputTextModule,
@@ -30,11 +35,11 @@ import {PickListModule} from "primeng/picklist";
     InputNumberModule,
     ToastModule,
     DropdownModule,
-    PickListModule
+    PickListModule,
+    RadioButtonModule
   ],
 })
-export class PrimeAngularModule implements OnInit {
-
+export class PrimengModule implements OnInit {
   constructor(private primengConfig: PrimeNGConfig) {
   }
 

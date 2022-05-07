@@ -5,7 +5,7 @@ import {MessageService} from "primeng/api";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [MessageService]
 })
 export class AppComponent {
+  title = 'register-dashboard';
 }

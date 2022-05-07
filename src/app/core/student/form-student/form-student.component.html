@@ -1,60 +1,45 @@
 <div>
-  <p-toolbar>
-    <span>Estudiante</span>
-  </p-toolbar>
+  <p-card header="Estudiante">
+    <form (ngSubmit)="submit()" [formGroup]="fg">
 
-  <p-card>
+      <div class="field">
+        <label for="name">Nombre</label>
+        <input id="name" pInputText type="text" class="inputfield w-full" formControlName="name">
+      </div>
 
-    <ng-template pTemplate="content">
-      <form (ngSubmit)="submit()" [formGroup]="form">
-        <div class="field grid">
-          <label for="name" class="col-12 mb-2 md:col-2 md:mb-0">Nombre</label>
-          <div class="col-12 md:col-10">
-            <input id="name" pInputText type="text" class="inputfield w-full" formControlName="name">
-          </div>
-        </div>
+      <div class="field">
+        <label for="fatherLastname">Apellido Paterno</label>
+        <input id="fatherLastname" pInputText type="text" class="inputfield w-full" formControlName="fatherLastname">
+      </div>
 
-        <div class="field grid">
-          <label for="fatherLastname" class="col-12 mb-2 md:col-2 md:mb-0">Apellido Paterno</label>
-          <div class="col-12 md:col-10">
-            <input id="fatherLastname" pInputText type="text" class="inputfield w-full"
-                   formControlName="fatherLastname">
-          </div>
-        </div>
+      <div class="field">
+        <label for="motherLastname">Apellido Materno</label>
+        <input id="motherLastname" pInputText type="text" class="inputfield w-full" formControlName="motherLastname">
+      </div>
 
-        <div class="field grid">
-          <label for="motherLastname" class="col-12 mb-2 md:col-2 md:mb-0">Apellido Materno</label>
-          <div class="col-12 md:col-10">
-            <input id="motherLastname" pInputText type="text" class="inputfield w-full"
-                   formControlName="motherLastname">
-          </div>
-        </div>
+      <div class="field">
+        <label for="dni">DNI</label>
+        <input id="dni" pInputText type="text" class="inputfield w-full" formControlName="dni" [maxLength]="8">
+      </div>
 
-        <div class="field grid">
-          <label for="dni" class="col-12 mb-2 md:col-2 md:mb-0">DNI</label>
-          <div class="col-12 md:col-10">
-            <input id="dni" pInputText type="text" class="inputfield w-full" formControlName="dni" [maxLength]="8">
-          </div>
-        </div>
+      <div class="field">
+        <label for="email">Correo</label>
+        <input id="email" pInputText type="email" class="inputfield w-full" formControlName="email">
+      </div>
 
-        <div class="field grid">
-          <label for="email" class="col-12 mb-2 md:col-2 md:mb-0">Correo</label>
-          <div class="col-12 md:col-10">
-            <input id="email" pInputText type="email" class="inputfield w-full" formControlName="email">
-          </div>
-        </div>
+      <div class="field">
+        <p-dropdown id="career" class="w-full inputfield"
+                    [options]="career"
+                    placeholder="Selecciona una carrera"
+                    optionLabel="name"
+                    optionValue="code"
+                    formControlName="career"></p-dropdown>
+      </div>
 
 
-        <button pButton pRipple type="submit" label="Guardar" icon="pi pi-save" [loading]="isLoading"
-                [disabled]="form.invalid"></button>
-
-        <button pButton pRipple label="Cancelar" icon="pi pi-times" (click)="clear()"
-                [disabled]="form.invalid"
-                class="p-button-raised p-button-danger"></button>
-
-      </form>
-    </ng-template>
-
+      <button pButton pRipple type="submit" label="Guardar" icon="pi pi-save" [disabled]="fg.invalid"></button>
+      <button pButton pRipple type="button" label="Cancelar" icon="pi pi-times" class="p-button-raised p-button-danger" (click)="clear()"></button>
+    </form>
 
   </p-card>
 </div>

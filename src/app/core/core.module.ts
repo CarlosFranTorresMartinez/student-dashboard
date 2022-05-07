@@ -1,29 +1,34 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {AppComponent} from "../app.component";
-import {NavbarComponent} from "./navbar/navbar.component";
-import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
-import {HomeComponent} from "./home/home.component";
-import {ListStudentComponent} from "./student/list-student/list-student.component";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PageNavbarComponent} from "./navbar/page-navbar/page-navbar.component";
 import {FormStudentComponent} from "./student/form-student/form-student.component";
+import {ListStudentComponent} from "./student/list-student/list-student.component";
 import {PageStudentComponent} from "./student/page-student/page-student.component";
-import {PrimeAngularModule} from "../module/prime-angular.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PrimengModule} from "./primeng.module";
+import {PageHomeComponent} from "./home/page-home/page-home.component";
+import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    ListStudentComponent,
+    PageNavbarComponent,
     FormStudentComponent,
-    PageStudentComponent
+    ListStudentComponent,
+    PageStudentComponent,
+    PageHomeComponent
+  ],
+  imports: [
+    CommonModule,
+    PrimengModule,
+    ReactiveFormsModule
   ],
   exports: [
-    PrimeAngularModule,
-    FormsModule,
-    ReactiveFormsModule
+    PageNavbarComponent,
+    FormStudentComponent,
+    ListStudentComponent,
+    PageStudentComponent,
+    PageHomeComponent
   ],
   providers: [CdkVirtualScrollViewport],
 })

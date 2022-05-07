@@ -1,15 +1,20 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {HomeModule} from "./module/home.module";
+import {InitModule} from "./module/init.module";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
-
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
-    HomeModule
+    InitModule,
+    CoreModule,
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
