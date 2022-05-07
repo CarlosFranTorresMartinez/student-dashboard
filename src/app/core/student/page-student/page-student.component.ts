@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Student} from 'src/app/model/Student';
-import {StudentService} from "../../services/student.service";
+import {Student} from "../../../model/Student";
+import {StudentService} from "../../../services/student.service";
 import {MessageService} from "primeng/api";
-import {StudentFormComponent} from "../../components/student/student-form/student-form.component";
+import {FormStudentComponent} from "../form-student/form-student.component";
 
 @Component({
-  selector: 'app-student-page',
-  templateUrl: './student-page.component.html',
-  styleUrls: ['./student-page.component.css']
+  selector: 'app-page-student',
+  templateUrl: './page-student.component.html',
+  styleUrls: ['./page-student.component.css']
 })
-export class StudentPageComponent implements OnInit {
+export class PageStudentComponent implements OnInit {
 
-  @ViewChild(StudentFormComponent) studentForm!: StudentFormComponent;
+  @ViewChild(FormStudentComponent) studentForm!: FormStudentComponent;
 
   studentList: Array<Student> = [];
   isLoadingList: boolean = false;
@@ -25,8 +25,13 @@ export class StudentPageComponent implements OnInit {
     this.getStudent();
   }
 
-  changeStatus(id: string) {
-    this.studentService.changeStatus(id).subscribe({
+  handleInput(e: Event) {
+    return (e.target as HTMLInputElement).value;
+  }
+
+  changeStatus(e: Event) {
+    const value = this.handleInput(e);
+    this.studentService.changeStatus(value).subscribe({
       next: value => {
         this.messageService.add({
           severity: 'success',
@@ -90,5 +95,6 @@ export class StudentPageComponent implements OnInit {
       }
     });
   }
+
 
 }

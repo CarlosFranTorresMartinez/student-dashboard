@@ -1,15 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Student} from "../../../model/Student";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuidv4} from "uuid";
 
 @Component({
-  selector: 'app-student-form',
-  templateUrl: './student-form.component.html',
-  styleUrls: ['./student-form.component.css']
+  selector: 'app-form-student',
+  templateUrl: './form-student.component.html',
+  styleUrls: ['./form-student.component.css']
 })
-export class StudentFormComponent {
-
+export class FormStudentComponent {
 
   @Output('onSubmit') onSubmit = new EventEmitter<Student>();
   @Output('onCancel') onCancel = new EventEmitter<void>();

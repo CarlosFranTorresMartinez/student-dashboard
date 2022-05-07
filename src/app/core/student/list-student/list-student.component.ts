@@ -1,19 +1,15 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Student} from "../../../model/Student";
-import {AssingPost} from "../../../model/assing/AssingPost";
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  selector: 'app-list-student',
+  templateUrl: './list-student.component.html',
+  styleUrls: ['./list-student.component.css']
 })
-export class StudentListComponent {
+export class ListStudentComponent {
 
   @Input()
   student!: Student[];
-
-  @Input()
-  status!: number;
 
   @Output('changeStatus')
   changeStatus: any = new EventEmitter<Object>();
@@ -26,5 +22,4 @@ export class StudentListComponent {
     const id = e;
     this.changeStatus.emit(id)
   }
-
 }

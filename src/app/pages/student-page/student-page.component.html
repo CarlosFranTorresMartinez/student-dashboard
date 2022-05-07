@@ -1,6 +1,0 @@
-<app-student-form (onSubmit)="save($event)" [isLoading]="isLoadingForm"></app-student-form>
-
-<p-progressSpinner *ngIf="isLoadingList" style=""></p-progressSpinner>
-<app-student-list [student]="studentList" *ngIf="!isLoadingList" [status]="status"
-                  (changeStatus)="changeStatus($event)"></app-student-list>
-

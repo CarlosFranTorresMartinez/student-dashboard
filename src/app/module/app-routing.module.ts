@@ -1,17 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {StudentPageComponent} from "./pages/student-page/student-page.component";
-import {AssingPageComponent} from "./pages/assing-page/assing-page.component";
+import {PageStudentComponent} from "../core/student/page-student/page-student.component";
 
 const router: Routes = [
   {
     path: 'student', children: [
-      {path: '', component: StudentPageComponent}
-    ]
-  },
-  {
-    path: 'assing', children: [
-      {path: '', component: AssingPageComponent}
+      {path: '', component: PageStudentComponent}
     ]
   }
 ]

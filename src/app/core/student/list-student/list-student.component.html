@@ -77,13 +77,5 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="summary">
-      <div class="flex align-items-center justify-content-between" *ngIf="status != 0">
-        Hay un total de {{student ? student.length : 0 }} alunmos registrados.
-      </div>
-      <div class="flex align-items-center justify-content-between" *ngIf="status == 0">
-        No se han encontrado datos debido a un error.
-      </div>
-    </ng-template>
   </p-table>
 </div>

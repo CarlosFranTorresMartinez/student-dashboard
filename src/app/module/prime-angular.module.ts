@@ -1,7 +1,6 @@
-import {NgModule, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MessageService, PrimeNGConfig} from 'primeng/api';
+import {PrimeNGConfig} from 'primeng/api';
 import {InputTextModule} from "primeng/inputtext";
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
@@ -16,10 +15,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {PickListModule} from "primeng/picklist";
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [],
-  imports: [
-    CommonModule,
-  ],
   exports: [
     BrowserAnimationsModule,
     InputTextModule,
