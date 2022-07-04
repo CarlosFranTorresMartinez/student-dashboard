@@ -1,9 +1,0 @@
-<div class="grid">
-  <div class="col-fixed" style="width: 500px">
-    <app-form-student (onSubmit)="onSubmit($event)"></app-form-student>
-  </div>
-  <div class="col">
-    <app-list-student [studentList]="listStudent" (changeStatus)="changeStatus($event)"
-                      (getDataStudentForUpdate)="getDataForStudent($event)"></app-list-student>
-  </div>
-</div>
