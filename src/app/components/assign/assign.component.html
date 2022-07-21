@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+<div class="bg-white">
+  <div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+        <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">Asignate nuevos tutoriados</h1>
+      </div>
+
+
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-f">
+
+        <form class="hidden lg:block">
+          <h3 class="sr-only">Categories</h3>
+          <div class="mt-5 md:mt-0 md:col-span-2">
+            <div class=" overflow-hidden sm:rounded-md">
+              <div class="px-4 py-5 sm:p-6">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6">
+                    <label for="search-name" class="block text-sm font-medium text-gray-700">Buscar por Nombre o
+                      Correo</label>
+                    <input type="text" name="street-address" id="search-name" autocomplete="street-address"
+                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+        <div class="lg:col-span-3">
+          <div class="rounded-lg h-96 lg:h-full">
+            <p-toolbar class="mb-2">
+              <ng-template pTemplate="left">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6">
+                    <label class="block text-sm font-medium text-gray-700">Elije un semestre </label>
+                    <p-dropdown [options]="sourceSemester"
+                                [(ngModel)]="targetSemester"
+                                optionLabel="name"
+                                class="mt-1 block w-full py-2 px-3 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></p-dropdown>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="right"></ng-template>
+            </p-toolbar>
+            <p-table #dt
+                     [value]="sourceStudent"
+                     [(selection)]="targetStudent"
+                     [globalFilterFields]="['name','email']"
+                     dataKey="_id"
+                     responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th>
+                  <th>Nombre</th>
+                  <th>Carrera</th>
+                  <th>Correo</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-student>
+                <tr>
+                  <td>
+                    <p-tableCheckbox [value]="student"></p-tableCheckbox>
+                  </td>
+                  <td>{{student.name}}</td>
+                  <td>{{student.career == "AS" ? 'Analasis de Sistemas' : 'Produccion Agraria'}}</td>
+                  <td>{{student.email}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <p-toolbar class="mb-2">
+              <ng-template pTemplate="left"></ng-template>
+              <ng-template pTemplate="right">
+                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-1"
+                        (click)="selectedStudents()"></button>
+              </ng-template>
+            </p-toolbar>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>

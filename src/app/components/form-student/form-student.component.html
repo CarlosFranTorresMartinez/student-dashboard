@@ -1,0 +1,156 @@
+<p-toast></p-toast>
+
+<div class="mt-6">
+  <button
+    pButton
+    icon="pi pi-user"
+    label="Registrarse como alumno"
+    (click)="openDialogStudent()"
+    class="p-button-raised w-full px-4 py-2 p-button-secondary p-button-text"></button>
+</div>
+
+<p-dialog header="Registrate como estudiante"
+          [style]="{width: '450px'}"
+          [(visible)]="displayDialogStudent"
+          [modal]="true"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="false"
+          styleClass="p-fluid">
+
+  <ng-template pTemplate="content">
+
+    <p-divider align="center" type="dashed">
+      <b>Obligatorios</b>
+    </p-divider>
+
+    <form [formGroup]="formStudent">
+      <label class="text-gray-700 dark:text-gray-200" for="name">Nombre Completo</label>
+      <input pInputText
+             id="name"
+             formControlName="name"
+             [ngClass]="validateFormStudent('name') ? 'input-error' : 'input-success'"
+             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+      <small id="name-help"
+             *ngIf="validateFormStudent('name')"
+             class="p-error block">
+        Es necesario tener el nombre completo.
+      </small>
+
+      <label class="text-gray-700 dark:text-gray-200" for="email">Correo de estudiante</label>
+      <input pInputText
+             id="email"
+             formControlName="email"
+             [ngClass]="validateFormStudent('email') ? 'input-error' : 'input-success'"
+             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+      <small id="email-help"
+             *ngIf="validateFormStudent('email')"
+             class="p-error block">
+        Es necesario tener el correo.
+      </small>
+
+      <label class="text-gray-700 dark:text-gray-200">Semestre</label>
+      <div class="flex">
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="1"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">1</label>
+        </div>
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="2"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">2</label>
+        </div>
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="3"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">3</label>
+        </div>
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="4"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">4</label>
+        </div>
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="5"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">5</label>
+        </div>
+
+        <div class="flex items-center mr-4">
+          <p-radioButton name="semester"
+                         value="6"
+                         formControlName="semester"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">6</label>
+        </div>
+      </div>
+      <small id="semester-help"
+             *ngIf="validateFormStudent('semester')"
+             class="p-error block">
+        Es un semestre.
+      </small>
+
+      <label class="text-gray-700 dark:text-gray-200">Carrera</label>
+      <div class="flex">
+        <div class="flex items-center mr-4">
+          <p-radioButton name="career"
+                         value="AS"
+                         formControlName="career"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Analisis de sistemas</label>
+        </div>
+        <div class="flex items-center mr-4">
+          <p-radioButton name="career"
+                         value="PA"
+                         formControlName="career"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Produccion Agraria</label>
+        </div>
+      </div>
+      <small id="career-help"
+             *ngIf="validateFormStudent('career')"
+             class="p-error block">
+        Es elejir una carrera.
+      </small>
+
+    </form>
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton
+            icon="pi pi-check"
+            label="Registrarte"
+            (click)="saveStudent()"
+            class="p-button-raised w-full px-4 py-2 p-button-text"></button>
+    <button pButton
+            icon="pi pi-times"
+            label="Cancelar"
+            (click)="closeDialogStudent()"
+            class="p-button-raised w-full px-4 py-2 p-button-danger p-button-text"></button>
+  </ng-template>
+</p-dialog>

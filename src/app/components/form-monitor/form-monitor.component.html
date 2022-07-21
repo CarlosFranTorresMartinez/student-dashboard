@@ -1,0 +1,93 @@
+<p-toast></p-toast>
+
+<div class="mt-6">
+  <button
+    pButton
+    icon="pi pi-user"
+    label="Registrarse como profesor"
+    (click)="openDialogMonitor()"
+    class="p-button-raised w-full px-4 py-2 p-button-secondary p-button-text"></button>
+</div>
+
+<p-dialog header="Registrate como estudiante"
+          [style]="{width: '450px'}"
+          [(visible)]="displayDialogMonitor"
+          [modal]="true"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="false"
+          styleClass="p-fluid">
+
+  <ng-template pTemplate="content">
+
+    <p-divider align="center" type="dashed">
+      <b>Obligatorios</b>
+    </p-divider>
+
+    <form [formGroup]="formMonitor">
+      <label class="text-gray-700 dark:text-gray-200" for="name">Nombre Completo</label>
+      <input pInputText
+             id="name"
+             formControlName="name"
+             [ngClass]="validateFormMonitor('name') ? 'input-error' : 'input-success'"
+             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+      <small id="name-help"
+             *ngIf="validateFormMonitor('name')"
+             class="p-error block">
+        Es necesario tener el nombre completo.
+      </small>
+
+      <label class="text-gray-700 dark:text-gray-200" for="email">Correo de estudiante</label>
+      <input pInputText
+             id="email"
+             formControlName="email"
+             [ngClass]="validateFormMonitor('email') ? 'input-error' : 'input-success'"
+             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+      <small id="email-help"
+             *ngIf="validateFormMonitor('email')"
+             class="p-error block">
+        Es necesario tener el correo.
+      </small>
+
+      <label class="text-gray-700 dark:text-gray-200">Carrera</label>
+      <div class="flex">
+        <div class="flex items-center mr-4">
+          <p-radioButton name="career"
+                         value="AS"
+                         formControlName="career"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Analisis de sistemas</label>
+        </div>
+        <div class="flex items-center mr-4">
+          <p-radioButton name="career"
+                         value="PA"
+                         formControlName="career"
+                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          </p-radioButton>
+          <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Produccion Agraria</label>
+        </div>
+      </div>
+      <small id="career-help"
+             *ngIf="validateFormMonitor('career')"
+             class="p-error block">
+        Es elejir una carrera.
+      </small>
+
+    </form>
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton
+            icon="pi pi-check"
+            label="Registrarte"
+            (click)="saveMonitor()"
+            class="p-button-raised w-full px-4 py-2 p-button-text"></button>
+    <button pButton
+            icon="pi pi-times"
+            label="Cancelar"
+            (click)="closeDialogMonitor()"
+            class="p-button-raised w-full px-4 py-2 p-button-danger p-button-text"></button>
+  </ng-template>
+</p-dialog>
