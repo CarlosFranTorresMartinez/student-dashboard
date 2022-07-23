@@ -11,7 +11,10 @@ import {HomeComponent} from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "@auth0/auth0-angular";
-import { AssignComponent } from './components/assign/assign.component';
+import {AssignComponent} from './components/assign/assign.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { TutoriadosComponent } from './components/tutoriados/tutoriados.component';
+import { TutoriasComponent } from './components/tutorias/tutorias.component';
 
 @NgModule({
   declarations: [
@@ -20,22 +23,23 @@ import { AssignComponent } from './components/assign/assign.component';
     FormStudentComponent,
     FormMonitorComponent,
     HomeComponent,
-    AssignComponent
+    AssignComponent,
+    LoadingComponent,
+    TutoriadosComponent,
+    TutoriasComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        PrimengModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AuthModule.forRoot({
-            domain: 'dev-7mqz38hr.us.auth0.com',
-            clientId: '211yAyBtcZXswWcsOoes8UUGvjp3YC9Q',
-            cacheLocation: 'localstorage',
-            useRefreshTokens: true,
-        }),
-        FormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PrimengModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'dev-7mqz38hr.us.auth0.com',
+      clientId: '211yAyBtcZXswWcsOoes8UUGvjp3YC9Q'
+    }),
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -49,7 +49,7 @@
                      [value]="sourceStudent"
                      [(selection)]="targetStudent"
                      [globalFilterFields]="['name','email']"
-                     dataKey="_id"
+                     dataKey="id"
                      responsiveLayout="scroll">
               <ng-template pTemplate="header">
                 <tr>
@@ -66,7 +66,7 @@
                   <td>
                     <p-tableCheckbox [value]="student"></p-tableCheckbox>
                   </td>
-                  <td>{{student.name}}</td>
+                  <td>{{student.name_complete}}</td>
                   <td>{{student.career == "AS" ? 'Analasis de Sistemas' : 'Produccion Agraria'}}</td>
                   <td>{{student.email}}</td>
                 </tr>

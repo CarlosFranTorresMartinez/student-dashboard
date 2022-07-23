@@ -14,7 +14,11 @@
       <div class="overflow-y-auto py-4 px-3 rounded">
         <ul class="space-y-2">
           <li>
-            <a href="#"
+            <a [routerLink]="['/home',{
+              outlets:{
+                'page':['tutoriados']
+              }
+            }]"
                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                    xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +44,11 @@
             </a>
           </li>
           <li>
-            <a href="#"
+            <a [routerLink]="['/home',{
+              outlets:{
+                'page':['tutorias']
+              }
+            }]"
                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                    xmlns="http://www.w3.org/2000/svg">

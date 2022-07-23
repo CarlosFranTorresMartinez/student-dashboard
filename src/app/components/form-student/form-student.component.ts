@@ -25,17 +25,15 @@ export class FormStudentComponent {
     this.formStudent = this.formBuilderStudent.group({
       name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@vallegrande.edu.pe$')]],
-      semester: [null, [Validators.required, Validators.maxLength(1)]],
       career: [null, [Validators.required, Validators.maxLength(2)]],
     })
   }
 
   saveStudent() {
     const student: Student = {
-      _id: uuidv4(),
-      name: this.formStudent.get('name')?.value,
+      id: uuidv4(),
+      name_complete: this.formStudent.get('name')?.value,
       email: this.formStudent.get('email')?.value,
-      semester: this.formStudent.get('semester')?.value,
       career: this.formStudent.get('career')?.value,
       status: 'A',
     }

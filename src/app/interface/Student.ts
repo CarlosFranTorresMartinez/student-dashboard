@@ -1,9 +1,8 @@
 export interface Student {
-  _id: string;
+  id: string;
   picture?: string;
-  name: string;
+  name_complete: string;
   email: string;
-  semester: string;
   career: string;
   status: string;
 }

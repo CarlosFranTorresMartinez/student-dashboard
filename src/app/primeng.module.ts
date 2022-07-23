@@ -11,6 +11,7 @@ import {TableModule} from "primeng/table";
 import {RippleModule} from "primeng/ripple";
 import {ToolbarModule} from "primeng/toolbar";
 import {DropdownModule} from "primeng/dropdown";
+import {SelectButtonModule} from "primeng/selectbutton";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {DropdownModule} from "primeng/dropdown";
     TableModule,
     RippleModule,
     ToolbarModule,
-    DropdownModule
+    DropdownModule,
+    SelectButtonModule
   ]
 })
 export class PrimengModule {
