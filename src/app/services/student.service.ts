@@ -19,7 +19,7 @@ export class StudentService {
     return this.httpClient.post(this.api + '/student/create', student);
   }
 
-  listStudentAssing(email: string | undefined, semester: string): Observable<StudentAssign[]> {
+  listStudentAssing(email: string | undefined, semester: string | undefined): Observable<StudentAssign[]> {
     const paramsStudent: HttpParams = new HttpParams()
       .set('email', String(email))
       .set('semester', String(semester));

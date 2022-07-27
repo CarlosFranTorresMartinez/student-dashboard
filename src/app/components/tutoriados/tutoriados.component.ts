@@ -4,6 +4,7 @@ import {Semester} from "../../interface/Semester";
 import {AuthService} from "@auth0/auth0-angular";
 import {StudentService} from "../../services/student.service";
 import {StudentAssign} from "../../interface/StudentAssign";
+import {SemesterAcademy} from "../../interface/SemesterAcademy";
 
 @Component({
   selector: 'app-tutoriados',
@@ -12,34 +13,53 @@ import {StudentAssign} from "../../interface/StudentAssign";
 })
 export class TutoriadosComponent implements OnInit {
 
-  semester: string = '1';
   semesterOptions!: Semester[];
-  assingStudent!: StudentAssign[];
+  semester!: string;
+
+  assignStudent!: StudentAssign[];
+
+  sourceSemesterAcademy!: SemesterAcademy[];
+  targetSemesterAcademy: SemesterAcademy = {
+    semesterAcademy: ""
+  };
+  semesterAcademy!: string;
 
   constructor(private assignService: AssignService, private studentService: StudentService, private auth: AuthService) {
-    auth.user$.subscribe(value => {
-      this.getStudentAssingByEmailofTutorAndSemestre(value?.email, this.semester);
-      this.getSemesterByEmailOfTutor(value?.email);
-    });
+    this.getSemester();
+    this.getStudentBySemester();
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(value => {
+      this.getSemesterAcademyByEmailOfTutor(value?.email);
+    });
   }
 
-  getSemesterByEmailOfTutor(email: string | undefined): Semester[] {
-    this.assignService.getSemester(email).subscribe(value => this.semesterOptions = value);
+  getSemester() {
+    this.auth.user$.subscribe(user => {
+      this.getSemesterByEmailOfTutor(user?.email, this.targetSemesterAcademy.semesterAcademy);
+    })
+  }
+
+  getStudentBySemester() {
+    this.auth.user$.subscribe(value => {
+      this.getStudentAssingByEmailofTutorAndSemestre(value?.email, this.semester);
+    })
+  }
+
+  getSemesterAcademyByEmailOfTutor(email: string | undefined): SemesterAcademy[] {
+    this.assignService.getSemesterAcademyByEmailOfTutor(email).subscribe(value => this.sourceSemesterAcademy = value)
+    return this.sourceSemesterAcademy;
+  }
+
+  getSemesterByEmailOfTutor(email: string | undefined, semesterAcademy: string | undefined): Semester[] {
+    this.assignService.getSemester(email, semesterAcademy).subscribe(value => this.semesterOptions = value);
     return this.semesterOptions;
   }
 
   getStudentAssingByEmailofTutorAndSemestre(email: string | undefined, semester: string): StudentAssign[] {
-    this.studentService.listStudentAssing(email, semester).subscribe(studentAssing => this.assingStudent = studentAssing);
-    return this.assingStudent;
-  }
-
-  getSemester() {
-    this.auth.user$.subscribe(value => {
-      this.getStudentAssingByEmailofTutorAndSemestre(value?.email, this.semester);
-    })
+    this.studentService.listStudentAssing(email, semester).subscribe(studentAssing => this.assignStudent = studentAssing);
+    return this.assignStudent;
   }
 
 }

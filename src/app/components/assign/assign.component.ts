@@ -8,7 +8,6 @@ import {v4 as uuidv4} from 'uuid';
 import {TutorService} from "../../services/tutor.service";
 import {AssignService} from "../../services/assign.service";
 import {MessageService} from "primeng/api";
-import {Tutor} from "../../interface/Tutor";
 
 @Component({
   selector: 'app-assign',
@@ -23,6 +22,8 @@ export class AssignComponent implements OnInit {
 
   sourceSemester!: Semester[];
   targetSemester!: Semester;
+
+  semesterAcademy!: string;
 
   constructor(private monitorService: TutorService,
               private studentService: StudentService,
@@ -42,6 +43,7 @@ export class AssignComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe(user => {
       this.monitorService.validateMonitor(user?.email).subscribe(data => {
+        this.getSemesterAcademy(data.career);
         this.listStudentNotAssing(data.career);
       })
     })
@@ -65,9 +67,10 @@ export class AssignComponent implements OnInit {
             const assign: Assign = {
               id: uuidv4(),
               tutor: tutor.id,
+              semester_academy: this.semesterAcademy,
               student: value.id,
               career: tutor.career,
-              semester: semester,
+              semester: this.semesterAcademy + "_S" + semester,
               status: 'A',
             }
 
@@ -94,6 +97,11 @@ export class AssignComponent implements OnInit {
         );
       });
     });
+  }
+
+  getSemesterAcademy(career: string | undefined): string {
+    this.assignService.getSemesterAcademy(career).subscribe(sa => this.semesterAcademy = sa.semesterAcademy);
+    return this.semesterAcademy;
   }
 
 }

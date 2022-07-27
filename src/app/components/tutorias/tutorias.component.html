@@ -1,1 +1,106 @@
-<p>tutorias works!</p>
+<body>
+<div class="container mx-auto">
+  <div class="flex justify-center px-6 my-12">
+
+    <div class="hidden lg:block lg:w-5/12 bg-cover rounded-l-lg ">
+      <img alt="imagen" class="object-cover" src="https://www.vallegrande.edu.pe/images/testimonios/LAB2022.jpg">
+    </div>
+
+    <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+      <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
+        <h3 class="pt-4 text-2xl text-center">Crear una tutoria</h3>
+        <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+          <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">
+              Semestre Academico
+            </label>
+            <div>
+              <p-dropdown placeholder="Elija un semestre"
+                          [options]="sourceSemester"
+                          [(ngModel)]="targetSemester"
+                          optionLabel="label"
+                          [ngModelOptions]="{standalone: true}"
+                          (onChange)="studentBySemester()"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">
+              Estudiante
+            </label>
+            <p-dropdown placeholder="Elija un estudiante"
+                        [options]="sourceStudent"
+                        [(ngModel)]="targetStudent"
+                        optionLabel="name_complete"
+                        [ngModelOptions]="{standalone: true}"
+            ></p-dropdown>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">
+              Hora de Inicio
+            </label>
+            <p-calendar [(ngModel)]="dateInitial"
+                        [showIcon]="true"
+                        [ngModelOptions]="{standalone: true}"
+                        [showTime]="true"
+                        [disabledDays]="[0]"
+                        dateFormat="MM dd, yy"></p-calendar>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">
+              Hora a Finalizar
+            </label>
+            <p-calendar [(ngModel)]="dateFinal"
+                        [showIcon]="true"
+                        [ngModelOptions]="{standalone: true}"
+                        [showTime]="true"
+                        [disabledDays]="[0]"
+                        dateFormat="MM dd, yy"></p-calendar>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700">
+              Comentario
+            </label>
+            <input pInputText
+                   id="name"
+                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+
+          </div>
+          <div class="mb-4">
+            <p-toolbar>
+              <ng-template pTemplate="left">
+                <label class="block mb-2 text-sm font-bold text-gray-700">
+                  Compromisos
+                </label>
+              </ng-template>
+              <ng-template pTemplate="right">
+                <button pButton pRipple type="button" icon="pi pi-plus" (click)="btnIncrement()"></button>
+              </ng-template>
+            </p-toolbar>
+            <div *ngFor="let value of compromiseArray; let i = index">
+              <br/>
+              <div class="p-inputgroup">
+                <input pInputText
+                       [(ngModel)]="value.value"
+                       #name="ngModel" name="value{{i}}"
+                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+
+                <button type="button" pButton pRipple icon="pi pi-times" class="p-button-danger"
+                        (click)="btnDecrement(i)"></button>
+              </div>
+            </div>
+          </div>
+          <div class="mb-6 text-center">
+            <button
+              class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+              type="button">
+              Register Account
+            </button>
+          </div>
+          <hr class="mb-6 border-t"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

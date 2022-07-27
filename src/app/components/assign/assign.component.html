@@ -43,7 +43,9 @@
                   </div>
                 </div>
               </ng-template>
-              <ng-template pTemplate="right"></ng-template>
+              <ng-template pTemplate="right">
+                <label class="block text-sm font-medium text-gray-700">{{semesterAcademy}}</label>
+              </ng-template>
             </p-toolbar>
             <p-table #dt
                      [value]="sourceStudent"
